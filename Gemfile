@@ -6,7 +6,6 @@ gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'pg', '~> 0.18'
 gem 'sidekiq', '~> 4.2'
 gem 'redis-rails', '~> 5.0'
-gem 'unicorn', '~> 5.1'
 gem 'dotenv-rails'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'

@@ -1,22 +1,14 @@
-FROM ruby:2.3.1-alpine
+FROM ruby:2.3
 MAINTAINER David Yurek <david.a.yurek@gmail.com>
 
-ENV BUILD_PACKAGES="curl-dev ruby-dev build-base bash" \
-    DEV_PACKAGES="zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev postgresql-dev" \
-    RUBY_PACKAGES="ruby-json yaml nodejs"
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
 
-    RUN apk update && \
-        apk upgrade && \
-        apk add --update\
-        $BUILD_PACKAGES \
-        $DEV_PACKAGES \
-        $RUBY_PACKAGES && \
-        rm -rf /var/cache/apk/* && \
-        mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY Gemfile* ./
+RUN bundle install
+COPY . .
 
-ONBUILD WORKDIR /usr/src/app
-ONBUILD COPY . /usr/src/app
-ONBUILD EXPOSE 3000
-ONBUILD RUN bundle config build.nokogiri --use-system-libraries && \
-            bundle install && \
-            bundle clean
+EXPOSE 3000
