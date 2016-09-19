@@ -2,7 +2,7 @@ FROM ruby:2.3.1-alpine
 MAINTAINER David Yurek <david.a.yurek@gmail.com>
 
 ENV BUILD_PACKAGES="curl-dev ruby-dev build-base bash" \
-    DEV_PACKAGES="zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev sqlite-dev postgresql-dev mysql-dev" \
+    DEV_PACKAGES="zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev postgresql-dev" \
     RUBY_PACKAGES="ruby-json yaml nodejs"
 
     RUN apk update && \
